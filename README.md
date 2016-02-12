@@ -2,8 +2,10 @@
 [![Github Issues](http://img.shields.io/github/issues/zerosteiner/crcelk.svg?style=flat-square)](https://github.com/zerosteiner/crcelk/issues)
 [![PyPi Release](https://img.shields.io/pypi/v/crcelk.svg?style=flat-square)](https://pypi.python.org/pypi/crcelk)
 
-This is an updated fork of the [CrcMoose][1] module
-for recent versions of Python. Python versions 2.6+ and 3.1+ are supported.
+This is an updated fork of the [CrcMoose][1] module for recent versions of
+Python. It provides a pure Python implementation of the CRC algorithm and
+allows for variants to easily be defined by providing their parameters such as
+width, starting polynomial, etc. Python versions 2.6+ and 3.1+ are supported.
 
 ## Usage Example
 ```python
