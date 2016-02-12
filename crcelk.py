@@ -29,8 +29,6 @@
 # algorithms in practice.  It is likely that some of my terminology is
 # inaccurate.
 
-# Requires at least Python 2.7
-
 """
 This module can model common CRC algorithms given the set of defining
 parameters.  This is intended to be easy to use for experimentation
@@ -124,7 +122,7 @@ from __future__ import unicode_literals
 import sys
 
 # <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html>
-__docformat__ = "restructuredtext en"
+__docformat__ = 'restructuredtext en'
 
 __version__ = '1.0'
 
@@ -220,7 +218,7 @@ class CrcAlgorithm(object):
                         polynomial += (i,)
 
             if polynomial[:1] != (width,):
-                ValueError("mismatch between width and polynomial degree")
+                ValueError('mismatch between width and polynomial degree')
 
         self.width = width
         self.polynomial = polynomial
@@ -230,7 +228,7 @@ class CrcAlgorithm(object):
         self.lsb_first_data = lsb_first_data
         self.xor_mask = xor_mask
 
-        if not hasattr(width, "__rlshift__"):
+        if not hasattr(width, '__rlshift__'):
             raise ValueError
 
         # FIXME: Need more checking of parameters.
@@ -278,7 +276,7 @@ class CrcAlgorithm(object):
         if self.lsb_first_data is not None:
             ca.lsb_first_data = not self.lsb_first_data
         if ca.name:
-            ca.name += " reflected"
+            ca.name += ' reflected'
         return ca
 
     def reverse(self):
@@ -292,7 +290,7 @@ class CrcAlgorithm(object):
         ca.polynomial.reverse()
         ca.polynomial = tuple(ca.polynomial)
         if ca.name:
-            ca.name += " reversed"
+            ca.name += ' reversed'
         return ca
 
     def _init_from_other(self, other):
@@ -451,7 +449,7 @@ def reflect(value, width):
         for x in range(width))
 
 def format_binary_string(value, width):
-    return "".join("01"[(value >> i) & 1] for i in range(width - 1, -1, -1))
+    return ''.join('01'[(value >> i) & 1] for i in range(width - 1, -1, -1))
 
 # Some standard algorithms are defined here.  I believe I was able to
 # verify the correctness of each of these in some way (against an
@@ -459,7 +457,7 @@ def format_binary_string(value, width):
 
 #: Same CRC algorithm as Python's zlib.crc32
 CRC32 = CrcAlgorithm(
-    name="CRC-32",
+    name='CRC-32',
     width=32,
     polynomial=(32, 26, 23, 22, 16, 12, 11, 10, 8, 7, 5, 4, 2, 1, 0),
     seed=0xFFFFFFFF,
@@ -468,7 +466,7 @@ CRC32 = CrcAlgorithm(
 )
 
 CRC16 = CrcAlgorithm(
-    name="CRC-16",
+    name='CRC-16',
     width=16,
     polynomial=(16, 15, 2, 0),
     seed=0x0000,
@@ -478,7 +476,7 @@ CRC16 = CrcAlgorithm(
 
 #: Used in USB data packets.
 CRC16_USB = CrcAlgorithm(
-    name="CRC-16-USB",
+    name='CRC-16-USB',
     width=16,
     polynomial=(16, 15, 2, 0),
     seed=0xFFFF,
@@ -487,7 +485,7 @@ CRC16_USB = CrcAlgorithm(
 )
 
 CRC_CCITT = CrcAlgorithm(
-    name="CRC-CCITT",
+    name='CRC-CCITT',
     width=16,
     polynomial=(16, 12, 5, 0),
     seed=0xFFFF,
@@ -497,7 +495,7 @@ CRC_CCITT = CrcAlgorithm(
 
 #: This is the algorithm used in X.25 and for the HDLC 2-byte FCS.
 CRC_HDLC = CrcAlgorithm(
-    name="CRC-HDLC",
+    name='CRC-HDLC',
     width=16,
     polynomial=(16, 12, 5, 0),
     seed=0xFFFF,
@@ -507,7 +505,7 @@ CRC_HDLC = CrcAlgorithm(
 
 #: Used in ATM HEC and SMBus.
 CRC8_SMBUS = CrcAlgorithm(
-    name="CRC-8-SMBUS",
+    name='CRC-8-SMBUS',
     width=8,
     polynomial=(8, 2, 1, 0),
     seed=0,
@@ -517,7 +515,7 @@ CRC8_SMBUS = CrcAlgorithm(
 
 #: Used in RFC-2440 and MIL STD 188-184.
 CRC24 = CrcAlgorithm(
-    name="CRC-24",
+    name='CRC-24',
     width=24,
     polynomial=(24, 23, 18, 17, 14, 11, 10, 7, 6, 5, 4, 3, 1, 0),
     seed=0xB704CE,
@@ -527,7 +525,7 @@ CRC24 = CrcAlgorithm(
 
 #: Used in Controller Area Network frames.
 CRC15 = CrcAlgorithm(
-    name="CRC-15",
+    name='CRC-15',
     width=15,
     polynomial=(15, 14, 10, 8, 7, 4, 3, 0),
     seed=0,
@@ -537,7 +535,7 @@ CRC15 = CrcAlgorithm(
 
 #: Used in iSCSI (RFC-3385); usually credited to Guy Castagnoli.
 CRC32C = CrcAlgorithm(
-    name="CRC-32C",
+    name='CRC-32C',
     width=32,
     polynomial=(32, 28, 27, 26, 25, 23, 22, 20, 19, 18, 14, 13, 11, 10, 9, 8, 6, 0),
     seed=0xFFFFFFFF,
@@ -547,7 +545,7 @@ CRC32C = CrcAlgorithm(
 
 #: CRC used in USB Token and Start-Of-Frame packets
 CRC5_USB = CrcAlgorithm(
-    name="CRC-5-USB",
+    name='CRC-5-USB',
     width=5,
     polynomial=(5, 2, 0),
     seed=0x1F,
@@ -557,7 +555,7 @@ CRC5_USB = CrcAlgorithm(
 
 #: ISO 3309
 CRC64 = CrcAlgorithm(
-    name="CRC-64",
+    name='CRC-64',
     width=64,
     polynomial=(64, 4, 3, 1, 0),
     seed=0,
@@ -567,10 +565,10 @@ CRC64 = CrcAlgorithm(
 
 #: This is just to show off the ability to handle a very wide CRC.
 # If this is a standard, I don't know where it is from.  I found the
-# polynomial on a web page of an apparent Czech "Lady Killer"
+# polynomial on a web page of an apparent Czech 'Lady Killer'
 # <http://www.volny.cz/lk77/crc256mmx/>.
 CRC256 = CrcAlgorithm(
-    name="CRC-256",
+    name='CRC-256',
     width=256,
     polynomial=0x82E2443E6320383A20B8A2A0A1EA91A3CCA99A30C5205038349C82AAA3A8FD27,
     seed=0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,
