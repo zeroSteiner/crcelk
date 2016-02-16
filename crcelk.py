@@ -126,12 +126,15 @@ __docformat__ = 'restructuredtext en'
 
 __version__ = '1.1'
 
+if sys.version_info[0] > 2:
+    long = int
+
 class CrcAlgorithm(object):
     """
     Represents the parameters of a CRC algorithm.
     """
 
-    def __init__(self, width, polynomial, name=None, seed=0, lsb_first=False, lsb_first_data=None, xor_mask=0):
+    def __init__(self, width, polynomial, name, seed=0, lsb_first=False, lsb_first_data=None, xor_mask=0):
         """
         :param width:
 
@@ -200,22 +203,24 @@ class CrcAlgorithm(object):
         """
 
         if width > 0:
-            try:
-                polymask = int(polynomial)
-            except TypeError:
-                # Guess it is already a sequence of exponents.
+            if isinstance(polynomial, (int, long)):
+                # Convert a mask to a tuple of exponents.
+                if lsb_first:
+                    polymask = reflect(polynomial, width)
+                else:
+                    polymask = polynomail
+                polynomial = (width,)
+                for i in range(width - 1, -1, -1):
+                    if (polymask >> i) & 1:
+                        polynomial += (i,)
+            elif isinstance(polynomial, (list, tuple)):
                 polynomial = list(polynomial)
                 polynomial.sort()
                 polynomial.reverse()
                 polynomial = tuple(polynomial)
             else:
-                # Convert a mask to a tuple of exponents.
-                if lsb_first:
-                    polymask = reflect(polymask, width)
-                polynomial = (width,)
-                for i in range(width - 1, -1, -1):
-                    if (polymask >> i) & 1:
-                        polynomial += (i,)
+                import pdb; pdb.set_trace()
+                raise TypeError('polynomial must be either an int, list, or tuple')
 
             if polynomial[:1] != (width,):
                 ValueError('mismatch between width and polynomial degree')
@@ -228,19 +233,8 @@ class CrcAlgorithm(object):
         self.lsb_first_data = lsb_first_data
         self.xor_mask = xor_mask
 
-        if not hasattr(width, '__rlshift__'):
-            raise ValueError
-
-        # FIXME: Need more checking of parameters.
-
     def __repr__(self):
-        info = ""
-        if self.name is not None:
-            info = ' "%s"' % str(self.name)
-        result = "<%s.%s%s @ %#x>" % (
-            self.__class__.__module__,
-            self.__class__.__name__,
-            info, id(self))
+        result = "<{0}.{1} '{2}' {3} >".format(self.__class__.__module__, self.__class__.__name__, self.name, id(self))
         return result
 
     def calc_bytes(self, s, value=None):
