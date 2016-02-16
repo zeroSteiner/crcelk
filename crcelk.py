@@ -124,7 +124,7 @@ import sys
 # <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html>
 __docformat__ = 'restructuredtext en'
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 class CrcAlgorithm(object):
     """
@@ -455,14 +455,34 @@ def format_binary_string(value, width):
 # verify the correctness of each of these in some way (against an
 # existing implementation or sample data with a known result).
 
-#: Same CRC algorithm as Python's zlib.crc32
-CRC32 = CrcAlgorithm(
-    name='CRC-32',
-    width=32,
-    polynomial=(32, 26, 23, 22, 16, 12, 11, 10, 8, 7, 5, 4, 2, 1, 0),
-    seed=0xFFFFFFFF,
+#: CRC used in USB Token and Start-Of-Frame packets
+CRC5_USB = CrcAlgorithm(
+    name='CRC-5-USB',
+    width=5,
+    polynomial=(5, 2, 0),
+    seed=0x1F,
     lsb_first=True,
-    xor_mask=0xFFFFFFFF
+    xor_mask=0x1F
+)
+
+#: Used in ATM HEC and SMBus.
+CRC8_SMBUS = CrcAlgorithm(
+    name='CRC-8-SMBUS',
+    width=8,
+    polynomial=(8, 2, 1, 0),
+    seed=0,
+    lsb_first=False,
+    xor_mask=0
+)
+
+#: Used in Controller Area Network frames.
+CRC15 = CrcAlgorithm(
+    name='CRC-15',
+    width=15,
+    polynomial=(15, 14, 10, 8, 7, 4, 3, 0),
+    seed=0,
+    lsb_first=False,
+    xor_mask=0
 )
 
 CRC16 = CrcAlgorithm(
@@ -503,14 +523,13 @@ CRC_HDLC = CrcAlgorithm(
     xor_mask=0xFFFF
 )
 
-#: Used in ATM HEC and SMBus.
-CRC8_SMBUS = CrcAlgorithm(
-    name='CRC-8-SMBUS',
-    width=8,
-    polynomial=(8, 2, 1, 0),
-    seed=0,
+CRC_XMODEM = CrcAlgorithm(
+    name='CRC-XModem',
+    width=16,
+    polynomial=(16, 12, 5, 0),
+    seed=0x0000,
     lsb_first=False,
-    xor_mask=0
+    xor_mask=0x0000
 )
 
 #: Used in RFC-2440 and MIL STD 188-184.
@@ -523,14 +542,14 @@ CRC24 = CrcAlgorithm(
     xor_mask=0
 )
 
-#: Used in Controller Area Network frames.
-CRC15 = CrcAlgorithm(
-    name='CRC-15',
-    width=15,
-    polynomial=(15, 14, 10, 8, 7, 4, 3, 0),
-    seed=0,
-    lsb_first=False,
-    xor_mask=0
+#: Same CRC algorithm as Python's zlib.crc32
+CRC32 = CrcAlgorithm(
+    name='CRC-32',
+    width=32,
+    polynomial=(32, 26, 23, 22, 16, 12, 11, 10, 8, 7, 5, 4, 2, 1, 0),
+    seed=0xFFFFFFFF,
+    lsb_first=True,
+    xor_mask=0xFFFFFFFF
 )
 
 #: Used in iSCSI (RFC-3385); usually credited to Guy Castagnoli.
@@ -541,16 +560,6 @@ CRC32C = CrcAlgorithm(
     seed=0xFFFFFFFF,
     lsb_first=True,
     xor_mask=0xFFFFFFFF
-)
-
-#: CRC used in USB Token and Start-Of-Frame packets
-CRC5_USB = CrcAlgorithm(
-    name='CRC-5-USB',
-    width=5,
-    polynomial=(5, 2, 0),
-    seed=0x1F,
-    lsb_first=True,
-    xor_mask=0x1F
 )
 
 #: ISO 3309
