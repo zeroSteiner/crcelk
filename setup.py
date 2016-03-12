@@ -31,7 +31,7 @@ from distutils.core import setup
 from crcelk import __version__
 
 setup(
-	name='CrcElk',
+	name='crcelk',
 	version=__version__,
 	author='Ray Burr',
 	maintainer='Spencer McIntyre',
@@ -51,6 +51,7 @@ setup(
 		'Programming Language :: Python :: 3.2',
 		'Programming Language :: Python :: 3.3',
 		'Programming Language :: Python :: 3.4',
+		'Programming Language :: Python :: 3.5',
 		'Topic :: Software Development :: Libraries :: Python Modules'
 	)
 )
