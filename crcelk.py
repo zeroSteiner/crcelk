@@ -58,8 +58,10 @@ input string '123456789':
   CRC-16-USB: B4C8
   CRC-CCITT: 29B1
   CRC-HDLC: 906E
+  CRC-XModem: 31C3
   CRC-24: 21CF02
   CRC-32: CBF43926
+  CRC-32-GCC: 0376E6E7
   CRC-32C: E3069283
   CRC-64: 46A5A9388A5BEFFE
   CRC-256: 79B96BDC0C519B239BE759EC0688C86FD25A3F4DF1E7F054AD1F923D0739DAC8
@@ -124,7 +126,7 @@ import sys
 # <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html>
 __docformat__ = 'restructuredtext en'
 
-__version__ = '1.1.1'
+__version__ = '1.2'
 
 if sys.version_info[0] > 2:
     long = int
@@ -134,7 +136,7 @@ class CrcAlgorithm(object):
     Represents the parameters of a CRC algorithm.
     """
 
-    def __init__(self, width, polynomial, name, seed=0, lsb_first=False, lsb_first_data=None, xor_mask=0):
+    def __init__(self, width, polynomial, name=None, seed=0, lsb_first=False, lsb_first_data=None, xor_mask=0):
         """
         :param width:
 
