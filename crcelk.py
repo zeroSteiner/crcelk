@@ -453,9 +453,9 @@ CRC5_USB = CrcAlgorithm(
     name='CRC-5-USB',
     width=5,
     polynomial=(5, 2, 0),
-    seed=0x1F,
+    seed=0x1f,
     lsb_first=True,
-    xor_mask=0x1F
+    xor_mask=0x1f
 )
 
 #: Used in ATM HEC and SMBus.
@@ -492,16 +492,16 @@ CRC16_USB = CrcAlgorithm(
     name='CRC-16-USB',
     width=16,
     polynomial=(16, 15, 2, 0),
-    seed=0xFFFF,
+    seed=0xffff,
     lsb_first=True,
-    xor_mask=0xFFFF
+    xor_mask=0xffff
 )
 
 CRC_CCITT = CrcAlgorithm(
     name='CRC-CCITT',
     width=16,
     polynomial=(16, 12, 5, 0),
-    seed=0xFFFF,
+    seed=0xffff,
     lsb_first=False,
     xor_mask=0x0000
 )
@@ -511,9 +511,9 @@ CRC_HDLC = CrcAlgorithm(
     name='CRC-HDLC',
     width=16,
     polynomial=(16, 12, 5, 0),
-    seed=0xFFFF,
+    seed=0xffff,
     lsb_first=True,
-    xor_mask=0xFFFF
+    xor_mask=0xffff
 )
 
 CRC_XMODEM = CrcAlgorithm(
@@ -530,7 +530,7 @@ CRC24 = CrcAlgorithm(
     name='CRC-24',
     width=24,
     polynomial=(24, 23, 18, 17, 14, 11, 10, 7, 6, 5, 4, 3, 1, 0),
-    seed=0xB704CE,
+    seed=0xb704ce,
     lsb_first=False,
     xor_mask=0
 )
@@ -540,9 +540,9 @@ CRC32 = CrcAlgorithm(
     name='CRC-32',
     width=32,
     polynomial=(32, 26, 23, 22, 16, 12, 11, 10, 8, 7, 5, 4, 2, 1, 0),
-    seed=0xFFFFFFFF,
+    seed=0xffffffff,
     lsb_first=True,
-    xor_mask=0xFFFFFFFF
+    xor_mask=0xffffffff
 )
 
 #: Used in iSCSI (RFC-3385); usually credited to Guy Castagnoli.
@@ -550,9 +550,19 @@ CRC32C = CrcAlgorithm(
     name='CRC-32C',
     width=32,
     polynomial=(32, 28, 27, 26, 25, 23, 22, 20, 19, 18, 14, 13, 11, 10, 9, 8, 6, 0),
-    seed=0xFFFFFFFF,
+    seed=0xffffffff,
     lsb_first=True,
-    xor_mask=0xFFFFFFFF
+    xor_mask=0xffffffff
+)
+
+#: Same CRC algorithm as used in GCC
+CRC32_GCC = CrcAlgorithm(
+    name='CRC-32-GCC',
+    width=32,
+    polynomial=(32, 26, 23, 22, 16, 12, 11, 10, 8, 7, 5, 4, 2, 1, 0),
+    seed=0xffffffff,
+    lsb_first=False,
+    xor_mask=0
 )
 
 #: ISO 3309
@@ -572,8 +582,8 @@ CRC64 = CrcAlgorithm(
 CRC256 = CrcAlgorithm(
     name='CRC-256',
     width=256,
-    polynomial=0x82E2443E6320383A20B8A2A0A1EA91A3CCA99A30C5205038349C82AAA3A8FD27,
-    seed=0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,
+    polynomial=0x82e2443e6320383a20b8a2a0a1ea91a3cca99a30c5205038349c82aaa3a8fd27,
+    seed=0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff,
     lsb_first=True,
     xor_mask=0
 )
