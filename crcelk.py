@@ -124,7 +124,7 @@ import sys
 # <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html>
 __docformat__ = 'restructuredtext en'
 
-__version__ = '1.1'
+__version__ = '1.1.1'
 
 if sys.version_info[0] > 2:
     long = int
@@ -208,7 +208,7 @@ class CrcAlgorithm(object):
                 if lsb_first:
                     polymask = reflect(polynomial, width)
                 else:
-                    polymask = polynomail
+                    polymask = polynomial
                 polynomial = (width,)
                 for i in range(width - 1, -1, -1):
                     if (polymask >> i) & 1:
@@ -219,7 +219,6 @@ class CrcAlgorithm(object):
                 polynomial.reverse()
                 polynomial = tuple(polynomial)
             else:
-                import pdb; pdb.set_trace()
                 raise TypeError('polynomial must be either an int, list, or tuple')
 
             if polynomial[:1] != (width,):
