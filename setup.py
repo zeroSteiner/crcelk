@@ -38,8 +38,8 @@ setup(
 	description='Updated fork of CrcMoose.',
 	url='https://github.com/zeroSteiner/crcelk',
 	license='MIT',
-	py_modules=('crcelk',),
-	classifiers=(
+	py_modules=['crcelk',],
+	classifiers=[
 		'Development Status :: 5 - Production/Stable',
 		'Environment :: Console',
 		'Intended Audience :: Developers',
@@ -53,5 +53,5 @@ setup(
 		'Programming Language :: Python :: 3.4',
 		'Programming Language :: Python :: 3.5',
 		'Topic :: Software Development :: Libraries :: Python Modules'
-	)
+	]
 )
