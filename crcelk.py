@@ -126,7 +126,7 @@ import sys
 # <http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html>
 __docformat__ = 'restructuredtext en'
 
-__version__ = '1.2'
+__version__ = '1.3'
 
 if sys.version_info[0] > 2:
     long = int
