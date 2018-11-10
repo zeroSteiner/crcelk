@@ -131,6 +131,8 @@ __version__ = '1.3'
 if sys.version_info[0] > 2:
     long = int
 
+algorithms = {}
+
 class CrcAlgorithm(object):
     """
     Represents the parameters of a CRC algorithm.
@@ -233,6 +235,9 @@ class CrcAlgorithm(object):
         self.lsb_first = lsb_first
         self.lsb_first_data = lsb_first_data
         self.xor_mask = xor_mask
+
+        if name is not None:
+            algorithms[name] = self
 
     def __repr__(self):
         result = "<{0}.{1} '{2}' {3} >".format(self.__class__.__module__, self.__class__.__name__, self.name, id(self))
