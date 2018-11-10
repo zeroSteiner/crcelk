@@ -26,19 +26,41 @@
 #  Original (Moose) Homepage: http://www.nightmare.com/~ryb/
 #  New (Elk) Homepage: https://github.com/zeroSteiner/crcelk/
 
-from distutils.core import setup
+import os
+import sys
 
 from crcelk import __version__
+
+base_directory = os.path.dirname(__file__)
+
+try:
+	from setuptools import setup, find_packages
+except ImportError:
+	print('This project needs setuptools in order to build. Install it using your package')
+	print('manager (usually python-setuptools) or via pip (pip install setuptools).')
+	sys.exit(1)
+
+with open(os.path.join(base_directory, 'README.rst'), 'r') as file_h:
+	long_description = file_h.read()
+
+DESCRIPTION = """\
+CrcElk is an updated fork of the CrcMoose module for recent versions of \
+Python. It provides a pure Python implementation of the CRC algorithm and \
+allows for variants to easily be defined by providing their parameters such as \
+width, starting polynomial, etc. Python versions 2.6+ and 3.1+ are supported.\
+"""
 
 setup(
     name='crcelk',
     version=__version__,
     author='Ray Burr',
     maintainer='Spencer McIntyre',
-    description='Updated fork of CrcMoose.',
+    maintainer_email='zeroSteiner@gmail.com',
+    description=DESCRIPTION,
+    long_description=long_description,
     url='https://github.com/zeroSteiner/crcelk',
     license='MIT',
-    py_modules=['crcelk',],
+    py_modules=['crcelk'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
